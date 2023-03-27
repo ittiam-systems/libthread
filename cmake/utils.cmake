@@ -24,6 +24,9 @@ function(defineInterfaces)
     if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "aarch64")
       target_compile_options("${projName}CompileOptions"
                              INTERFACE -march=armv8-a)
+    elseif(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "aarch32")
+      target_compile_options("${projName}CompileOptions"
+                             INTERFACE -march=armv7-a -mfpu=neon)
     else()
       target_compile_options("${projName}CompileOptions"
                              INTERFACE -march=native)
