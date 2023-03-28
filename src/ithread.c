@@ -51,6 +51,10 @@
 #include <unistd.h>
 #endif
 
+#ifdef MACOS
+#include <dispatch/dispatch.h>
+#endif
+
 #ifdef WINDOWS
 #include <windows.h>
 
@@ -389,7 +393,53 @@ void ithread_usleep(uint32_t u4_time_us)
 {
   usleep(u4_time_us);
 }
+#ifdef MACOS
+typedef struct  {
+    dispatch_semaphore_t    disp_sem;
+}mac_sem;
 
+uint32_t ithread_get_sem_struct_size(void)
+{
+  return (sizeof(mac_sem));
+}
+
+int32_t ithread_sem_init(void *sem, int32_t pshared, uint32_t value)
+{
+	mac_sem *mac_sem = sem;
+        UNUSED(pshared);
+	
+	dispatch_semaphore_t *dispatch_sem = &mac_sem->disp_sem;
+
+    *dispatch_sem = dispatch_semaphore_create(value);
+    return 1;
+}
+
+int32_t ithread_sem_post(void *sem)
+{
+	mac_sem *mac_sem = sem;
+	
+	dispatch_semaphore_signal(mac_sem->disp_sem);
+    return 1;
+}
+
+int32_t ithread_sem_wait(void *sem)
+{
+	mac_sem *mac_sem = sem;
+	
+	dispatch_semaphore_wait(mac_sem->disp_sem, DISPATCH_TIME_FOREVER);
+  return 1;
+}
+
+int32_t ithread_sem_destroy(void *sem)
+{
+	mac_sem *mac_sem = sem;
+        //UNUSED(sem);
+	
+	dispatch_release(mac_sem->disp_sem);
+  return 1;
+}
+
+#else //LINUX
 uint32_t ithread_get_sem_struct_size(void)
 {
   return (sizeof(sem_t));
@@ -414,6 +464,7 @@ int32_t ithread_sem_destroy(void *sem)
 {
   return sem_destroy((sem_t *) sem);
 }
+#endif //end of Linux
 
 void ithread_set_name(char *pc_thread_name)
 {
