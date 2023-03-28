@@ -21,6 +21,12 @@ function(defineInterfaces)
       "${projName}CompileOptions" INTERFACE -Wall -Wextra -Wpedantic
                                             -Wconversion -Werror)
 
+    if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Darwin")
+      target_compile_definitions("${projName}CompileOptions" INTERFACE MACOS)
+    else()
+      target_compile_definitions("${projName}CompileOptions" INTERFACE LINUX)
+    endif()
+
     if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "aarch64")
       target_compile_options("${projName}CompileOptions"
                              INTERFACE -march=armv8-a)

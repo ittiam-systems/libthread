@@ -15,7 +15,7 @@ This library provides abstractions for threading functions, mutex, and semaphore
     libThreadPath=<Path to libfgs repo>
     buildTree=<Name of buildTree folder>
     installPath=<Path to install folder>
-    cd ${libfgsPath}
+    cd ${libThreadPath}
     cmake . -B ${buildTree}\
     -DCMAKE_INSTALL_LIBDIR:STRING=${installPath}\
     -DCMAKE_INSTALL_INCLUDEDIR:STRING=${installPath}
@@ -32,10 +32,10 @@ This library provides abstractions for threading functions, mutex, and semaphore
 1. Create a buildtree
   ```
     toolchainPath=<Path to aarch64 toolchain>
-    libfgsPath=<Path to libfgs repo>
+    libThreadPath=<Path to libfgs repo>
     buildTree=<Name of buildTree folder>
     installPath=<Path to install folder>
-    cd ${libfgsPath}
+    cd ${libThreadPath}
     PATH=${toolchainPath}:${PATH} cmake . -B ${buildTree}\
     -DCMAKE_TOOLCHAIN_FILE=./cmake/toolchains/aarch64_toolchain.cmake\
     -DCMAKE_INSTALL_LIBDIR:STRING=${installPath}\
@@ -53,10 +53,10 @@ This library provides abstractions for threading functions, mutex, and semaphore
 1. Open git bash
 2. Create a buildtree
   ```
-    libfgsPath=<Path to libfgs repo>
+    libThreadPath=<Path to libfgs repo>
     buildTree=<Name of buildTree folder>
     installPath=<Path to install folder>
-    cd ${libfgsPath}
+    cd ${libThreadPath}
     cmake . -B ${buildTree} -A x64
   ```
 2. Build using buildtree
