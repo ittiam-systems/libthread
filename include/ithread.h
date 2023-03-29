@@ -40,7 +40,7 @@
 
 #include <stdint.h>
 
-#define UNUSED(x) ((void) x)
+#define ITHREAD_UNUSED(x) ((void) x)
 
 typedef void *(*ThreadFxn)(void *);
 

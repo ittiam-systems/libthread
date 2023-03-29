@@ -49,6 +49,27 @@ This library provides abstractions for threading functions, mutex, and semaphore
   ```      
     cmake --install ${buildTree}
   ```
+### **Building for aarch32 Linux**
+1. Create a buildtree
+  ```
+    toolchainPath=<Path to aarch32 toolchain>
+    libThreadPath=<Path to libfgs repo>
+    buildTree=<Name of buildTree folder>
+    installPath=<Path to install folder>
+    cd ${libThreadPath}
+    PATH=${toolchainPath}:${PATH} cmake . -B ${buildTree}\
+    -DCMAKE_TOOLCHAIN_FILE=./cmake/toolchains/aarch32_toolchain.cmake\
+    -DCMAKE_INSTALL_LIBDIR:STRING=${installPath}\
+    -DCMAKE_INSTALL_INCLUDEDIR:STRING=${installPath}
+  ```
+2. Build using buildtree
+  ```      
+    cmake --build ${buildTree}
+  ```
+3. Install (Installs to 'lib' folder)
+  ```      
+    cmake --install ${buildTree}
+  ```
 ### **Building for x86-64 Windows**
 1. Open git bash
 2. Create a buildtree
