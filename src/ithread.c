@@ -76,7 +76,7 @@ int32_t ithread_create(void *thread_handle, void *attribute, ThreadFxn strt, voi
   HANDLE *ppv_thread_handle;
   HANDLE  thread_handle_value;
 
-  UNUSED(attribute);
+  ITHREAD_UNUSED(attribute);
 
   if (0 == thread_handle)
     return -1;
@@ -98,7 +98,7 @@ int32_t ithread_join(void *thread_handle, void **val_ptr)
   HANDLE *ppv_thread_handle;
   HANDLE  thread_handle_value;
 
-  UNUSED(val_ptr);
+  ITHREAD_UNUSED(val_ptr);
 
   if (0 == thread_handle)
     return -1;
@@ -234,7 +234,7 @@ int32_t ithread_sem_init(void *sem, int32_t pshared, uint32_t value)
   HANDLE *sem_handle = (HANDLE *) sem;
   HANDLE  sem_handle_value;
 
-  UNUSED(pshared);
+  ITHREAD_UNUSED(pshared);
 
   if (0 == sem)
     return -1;
@@ -308,14 +308,14 @@ int32_t ithread_sem_destroy(void *sem)
 
 int32_t ithread_set_affinity(int32_t core_id)
 {
-  UNUSED(core_id);
+  ITHREAD_UNUSED(core_id);
 
   return 1;
 }
 
 void ithread_set_name(char *pc_thread_name)
 {
-  UNUSED(pc_thread_name);
+  ITHREAD_UNUSED(pc_thread_name);
 
   return;
 }
@@ -334,14 +334,14 @@ uint32_t ithread_get_mutex_lock_size(void)
 
 int32_t ithread_create(void *thread_handle, void *attribute, ThreadFxn strt, void *argument)
 {
-  UNUSED(attribute);
+  ITHREAD_UNUSED(attribute);
   return pthread_create((pthread_t *) thread_handle, NULL, strt, argument);
 }
 
 int32_t ithread_join(void *thread_handle, void **val_ptr)
 {
   pthread_t *pthread_handle = (pthread_t *) thread_handle;
-  UNUSED(val_ptr);
+  ITHREAD_UNUSED(val_ptr);
   return pthread_join(*pthread_handle, NULL);
 }
 
@@ -407,7 +407,7 @@ uint32_t ithread_get_sem_struct_size(void)
 int32_t ithread_sem_init(void *sem, int32_t pshared, uint32_t value)
 {
   mac_sem *mac_sem = sem;
-  UNUSED(pshared);
+  ITHREAD_UNUSED(pshared);
 
   dispatch_semaphore_t *dispatch_sem = &mac_sem->disp_sem;
 
@@ -434,7 +434,7 @@ int32_t ithread_sem_wait(void *sem)
 int32_t ithread_sem_destroy(void *sem)
 {
   mac_sem *mac_sem = sem;
-  // UNUSED(sem);
+  // ITHREAD_UNUSED(sem);
 
   dispatch_release(mac_sem->disp_sem);
   return 1;
@@ -473,7 +473,7 @@ void ithread_set_name(char *pc_thread_name)
 #ifndef WIN32
 #ifndef QNX
 #ifndef IOS
-  UNUSED(pc_thread_name);
+  ITHREAD_UNUSED(pc_thread_name);
 #endif
 #endif
 #endif
@@ -495,7 +495,7 @@ int32_t ithread_set_affinity(int32_t core_id)
 
 #elif SYSCALL_AFFINITY
   int32_t i4_sys_res;
-  UNUSED(core_id);
+  ITHREAD_UNUSED(core_id);
 
   pid_t pid = gettid();
 
@@ -505,7 +505,7 @@ int32_t ithread_set_affinity(int32_t core_id)
     return -1;
   }
 #else
-  UNUSED(core_id);
+  ITHREAD_UNUSED(core_id);
 #endif
   return 1;
 }
