@@ -1,5 +1,6 @@
 function(defineInterfaces)
   add_library("${projName}CompileOptions" INTERFACE)
+  target_compile_features("${projName}CompileOptions" INTERFACE c_std_99)
 
   if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Windows")
     target_compile_options(

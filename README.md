@@ -6,7 +6,7 @@ This library provides abstractions for threading functions, mutex, and semaphore
 
 ### **Prerequisites**
 * cmake >= 3.25
-* gcc / clang toolchain (For x86-64 and aarch64 Linux builds)
+* gcc >= 4.8.5 / clang toolchain (For x86-64 and aarch64 Linux builds)
 * Visual Studio (For Windows builds)
 
 ### **Building for x86-64 Linux**
