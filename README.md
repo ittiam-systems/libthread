@@ -91,3 +91,5 @@ This library provides abstractions for threading functions, mutex, and semaphore
   ```      
     cmake --install ${buildTree}
   ```
+## **License**
+A BSD 3-Clause-Clear license is applicable. Refer to the [LICENSE](https://github.com/ittiam-systems/libthread/LICENSE) file together with the [LICENSE2](https://github.com/ittiam-systems/libthread/LICENSE2) file.
